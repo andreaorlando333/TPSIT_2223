@@ -16,10 +16,10 @@ PORT = 5000 # > 1024, già occupate
 def chatServer():
     print("Server in ascolto...")
 
-
+    with socket(AF_INET, SOCK_DGRAM) as s:
+             s.bind((HOST, PORT))
     while True:
-        with socket(AF_INET, SOCK_DGRAM) as s:
-            s.bind((HOST, PORT))
+      
             s.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
             msg = s.recvfrom(BUFFER_SIZE)
             msg = msg[0].decode('utf8')
