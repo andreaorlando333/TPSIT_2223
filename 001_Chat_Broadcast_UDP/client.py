@@ -11,12 +11,15 @@ def chatClient():
     username = input("Inserisci username: ")
     username = username.encode('utf8')
     while True:
+
         with socket(AF_INET, SOCK_DGRAM) as s:
             s.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
             msg = input("Inserisci un messaggio da inviare: ")
             msg = msg.encode('utf8')
             s.sendto(username, (HOST, PORT))
             s.sendto(msg,(HOST, PORT))
+            print(f'Messaggio inviato in broadcast, su IP: {HOST}, {PORT}.\n')
 
 if __name__ == "__main__":
     chatClient()
+
